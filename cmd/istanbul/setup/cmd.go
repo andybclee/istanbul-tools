@@ -61,6 +61,8 @@ var (
 			quorumFlag,
 			dockerComposeFlag,
 			saveFlag,
+			keysFolderFlag,
+			scriptFolderFlag,
 		},
 	}
 )
@@ -94,8 +96,11 @@ func gen(ctx *cli.Context) error {
 
 			if ctx.Bool(saveFlag.Name) {
 				folderName := strconv.Itoa(i)
+				if keyFolder != "" {
+					folderName = keyFolder
+				}
 				os.MkdirAll(folderName, os.ModePerm)
-				ioutil.WriteFile(path.Join(folderName, "nodekey"), []byte(nodekeys[i]), os.ModePerm)
+				ioutil.WriteFile(path.Join(folderName, "nodekey"+strconv.Itoa(i+1)), []byte(nodekeys[i]), os.ModePerm)
 			}
 		}
 	}
@@ -108,6 +113,13 @@ func gen(ctx *cli.Context) error {
 	if ctx.Bool(staticNodesFlag.Name) {
 		name := "static-nodes.json"
 		fmt.Println(name)
+
+		// 스크립트 저장 위치가 지정되면 해당 위치에 저장.
+		if scriptFolder != "" {
+			os.MkdirAll(scriptFolder, os.ModePerm)
+			name = path.Join(scriptFolder, name)
+		}
+
 		fmt.Println(string(staticNodes))
 		fmt.Print("\n\n\n")
 
@@ -128,11 +140,20 @@ func gen(ctx *cli.Context) error {
 	} else {
 		jsonBytes, _ = json.MarshalIndent(g, "", "    ")
 	}
-	fmt.Println("genesis.json")
+
+	genesisname := "genesis.json"
+	fmt.Println(genesisname)
+
+	// 스크립트 저장 위치가 지정되면 해당 위치에 저장.
+	if scriptFolder != "" {
+		os.MkdirAll(scriptFolder, os.ModePerm)
+		genesisname = path.Join(scriptFolder, genesisname)
+	}
+
 	fmt.Println(string(jsonBytes))
 
 	if ctx.Bool(saveFlag.Name) {
-		ioutil.WriteFile("genesis.json", jsonBytes, os.ModePerm)
+		ioutil.WriteFile(genesisname, jsonBytes, os.ModePerm)
 	}
 
 	if ctx.Bool(dockerComposeFlag.Name) {

@@ -33,7 +33,7 @@ import (
 
 const (
 	FileName       = "genesis.json"
-	InitGasLimit   = 4700000
+	InitGasLimit   = 999999999999 // 4700000
 	InitDifficulty = 1
 )
 

@@ -18,6 +18,9 @@ package setup
 
 import "github.com/urfave/cli"
 
+var keyFolder string
+var scriptFolder string
+
 var (
 	numOfValidatorsFlag = cli.IntFlag{
 		Name:  "num",
@@ -47,5 +50,19 @@ var (
 	saveFlag = cli.BoolFlag{
 		Name:  "save",
 		Usage: "Save to files",
+	}
+
+	keysFolderFlag = cli.StringFlag{
+		Name:        "keyFolder",
+		Value:       "./keys",
+		Usage:       "Save nodekey files on this folder",
+		Destination: &keyFolder,
+	}
+
+	scriptFolderFlag = cli.StringFlag{
+		Name:        "scriptFolder",
+		Value:       "./scripts",
+		Usage:       "Save genesis.json / static-nodes.json here",
+		Destination: &scriptFolder,
 	}
 )
