@@ -47,6 +47,8 @@ func GasLimit(limit uint64) Option {
 
 func Alloc(addrs []common.Address, balance *big.Int) Option {
 	return func(genesis *core.Genesis) {
+		// 어드레스 하나에도 많은 펀드를 추가한다. 이 계정은 key1, passwords.txt에 있음.
+		addrs = append(addrs, common.HexToAddress("f1112d590851764745499c855bd4a4574ffe9079"))
 		alloc := make(map[common.Address]core.GenesisAccount)
 		for _, addr := range addrs {
 			alloc[addr] = core.GenesisAccount{Balance: balance}
