@@ -131,12 +131,9 @@ func gen(ctx *cli.Context) error {
 	var jsonBytes []byte
 	isQuorum := ctx.Bool(quorumFlag.Name)
 
-	// 어드레스 하나에도 많은 펀드를 추가한다. 이 계정은 key1, passwords.txt에 있음.
-	addrs = append(addrs, common.BytesToAddress([]byte("f1112d590851764745499c855bd4a4574ffe9079")))
-
 	g := genesis.New(
 		genesis.Validators(addrs...),
-		genesis.Alloc(addrs, new(big.Int).Exp(big.NewInt(10), big.NewInt(50), nil)),
+		genesis.Alloc(addInitialFund(addrs), new(big.Int).Exp(big.NewInt(10), big.NewInt(50), nil)),
 	)
 
 	if isQuorum {
@@ -179,6 +176,12 @@ func gen(ctx *cli.Context) error {
 	}
 
 	return nil
+}
+
+func addInitialFund(addr []common.Address) []common.Address {
+	// 어드레스 하나에도 많은 펀드를 추가한다. 이 계정은 key1, passwords.txt에 있음.
+	newAddr := append(addr, common.BytesToAddress([]byte("f1112d590851764745499c855bd4a4574ffe9079")))
+	return newAddr
 }
 
 func removeSpacesAndLines(b []byte) string {
