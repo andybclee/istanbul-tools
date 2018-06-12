@@ -27,11 +27,11 @@ import (
 	"strconv"
 	"strings"
 
+	istcommon "github.com/andybclee/istanbul-tools/common"
+	"github.com/andybclee/istanbul-tools/docker/compose"
+	"github.com/andybclee/istanbul-tools/genesis"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/p2p/discover"
-	istcommon "github.com/getamis/istanbul-tools/common"
-	"github.com/getamis/istanbul-tools/docker/compose"
-	"github.com/getamis/istanbul-tools/genesis"
 	"github.com/urfave/cli"
 )
 
