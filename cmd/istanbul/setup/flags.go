@@ -69,7 +69,7 @@ var (
 
 	fundingAddrFlag = cli.StringFlag{
 		Name:        "fundingAddr",
-		Value:       "f1112d590851764745499c855bd4a4574ffe9079",
+		Value:       "75a59b94889a05c03c66c3c84e9d2f8308ca4abd",
 		Usage:       "Give initial fund to the given addr",
 		Destination: &fundingAddr,
 	}
