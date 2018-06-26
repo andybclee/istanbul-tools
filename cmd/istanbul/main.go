@@ -22,9 +22,9 @@ import (
 
 	"github.com/urfave/cli"
 
-	"github.com/andybclee/istanbul-tools/cmd/istanbul/extra"
-	"github.com/andybclee/istanbul-tools/cmd/istanbul/setup"
-	"github.com/andybclee/istanbul-tools/cmd/utils"
+	"github.com/getamis/istanbul-tools/cmd/istanbul/extra"
+	"github.com/getamis/istanbul-tools/cmd/istanbul/setup"
+	"github.com/getamis/istanbul-tools/cmd/utils"
 )
 
 func main() {

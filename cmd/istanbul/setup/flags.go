@@ -20,6 +20,7 @@ import "github.com/urfave/cli"
 
 var keyFolder string
 var scriptFolder string
+var fundingAddr string
 
 var (
 	numOfValidatorsFlag = cli.IntFlag{
@@ -64,5 +65,12 @@ var (
 		Value:       "./scripts",
 		Usage:       "Save genesis.json / static-nodes.json here",
 		Destination: &scriptFolder,
+	}
+
+	fundingAddrFlag = cli.StringFlag{
+		Name:        "fundingAddr",
+		Value:       "f1112d590851764745499c855bd4a4574ffe9079",
+		Usage:       "Give initial fund to the given addr",
+		Destination: &fundingAddr,
 	}
 )

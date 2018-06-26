@@ -27,11 +27,11 @@ import (
 	"strconv"
 	"strings"
 
-	istcommon "github.com/andybclee/istanbul-tools/common"
-	"github.com/andybclee/istanbul-tools/docker/compose"
-	"github.com/andybclee/istanbul-tools/genesis"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/p2p/discover"
+	istcommon "github.com/getamis/istanbul-tools/common"
+	"github.com/getamis/istanbul-tools/docker/compose"
+	"github.com/getamis/istanbul-tools/genesis"
 	"github.com/urfave/cli"
 )
 
@@ -63,6 +63,7 @@ var (
 			saveFlag,
 			keysFolderFlag,
 			scriptFolderFlag,
+			fundingAddrFlag,
 		},
 	}
 )
@@ -101,6 +102,9 @@ func gen(ctx *cli.Context) error {
 				}
 				os.MkdirAll(folderName, os.ModePerm)
 				ioutil.WriteFile(path.Join(folderName, "nodekey"+strconv.Itoa(i+1)), []byte(nodekeys[i]), os.ModePerm)
+
+				//validators 정보를 validators.txt에 저장
+				ioutil.WriteFile(path.Join(folderName, "validator"+strconv.Itoa(i+1)), []byte(str), os.ModePerm)
 			}
 		}
 	}
@@ -180,7 +184,8 @@ func gen(ctx *cli.Context) error {
 
 func addInitialFund(addr []common.Address) []common.Address {
 	// 어드레스 하나에도 많은 펀드를 추가한다. 이 계정은 key1, passwords.txt에 있음.
-	newAddr := append(addr, common.BytesToAddress([]byte("f1112d590851764745499c855bd4a4574ffe9079")))
+	fmt.Println("addInitialFund: " + fundingAddr)
+	newAddr := append(addr, common.HexToAddress(fundingAddr))
 	return newAddr
 }
 
