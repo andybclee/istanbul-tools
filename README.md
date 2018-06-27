@@ -1,3 +1,7 @@
+# Build
+현재 패키지를 다 변경해 두지 않았기 때문에, clone / go get 한 후 $GOROOT/src/github.com/getamis/ 아래로 옮겨야 빌드가 제대로 됩니다.
+원래 버전과 달라진 부분은 3개의 argument가 추가되었고, 일부 템플릿에 변화가 있습니다.
+
 # istanbul-tools
 
 [![Test Status](https://travis-ci.org/getamis/istanbul-tools.svg?branch=feature%2Fadd-travis-yml)](https://travis-ci.org/getamis/istanbul-tools)
